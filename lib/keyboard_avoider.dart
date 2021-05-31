@@ -41,7 +41,8 @@ class KeyboardAvoider extends StatefulWidget {
   _KeyboardAvoiderState createState() => _KeyboardAvoiderState();
 }
 
-class _KeyboardAvoiderState extends State<KeyboardAvoider> with WidgetsBindingObserver {
+class _KeyboardAvoiderState extends State<KeyboardAvoider>
+    with WidgetsBindingObserver {
   final _animationKey = GlobalKey<ImplicitlyAnimatedWidgetState>();
   Function(AnimationStatus)? _animationListener;
   ScrollController? _scrollController;
@@ -57,7 +58,8 @@ class _KeyboardAvoiderState extends State<KeyboardAvoider> with WidgetsBindingOb
   void dispose() {
     WidgetsBinding.instance?.removeObserver(this);
     if (_animationListener != null) {
-      _animationKey.currentState?.animation.removeStatusListener(_animationListener!);
+      _animationKey.currentState?.animation
+          .removeStatusListener(_animationListener!);
     }
     super.dispose();
   }
@@ -69,7 +71,8 @@ class _KeyboardAvoiderState extends State<KeyboardAvoider> with WidgetsBindingOb
     if (_animationListener == null) {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         _animationListener = _animationStatusChanged;
-        _animationKey.currentState?.animation.addStatusListener(_animationListener!);
+        _animationKey.currentState?.animation
+            .addStatusListener(_animationListener!);
       });
     }
 
@@ -139,7 +142,7 @@ class _KeyboardAvoiderState extends State<KeyboardAvoider> with WidgetsBindingOb
   }
 
   void _resize() {
-    if (context == null) {
+    if (!mounted) {
       return;
     }
 
@@ -223,7 +226,8 @@ class _KeyboardAvoiderState extends State<KeyboardAvoider> with WidgetsBindingOb
 
     if (viewport == null) return;
 
-    final offset = viewport.getOffsetToReveal(object, 1.0).offset + widget.focusPadding;
+    final offset =
+        viewport.getOffsetToReveal(object, 1.0).offset + widget.focusPadding;
 
     if (_scrollController == null) return;
     // If the object is covered by the keyboard, scroll to reveal it,
